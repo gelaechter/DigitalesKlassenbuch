@@ -7,7 +7,7 @@
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
              <!-- Brand/logo -->
             <a class="navbar-brand" href="#">
-                <img src="./logo.jpg" alt="logo" style="width:40px;">
+                <img src="./logo.png" alt="logo" style="width:40px;">
             </a>
       
             <ul class="navbar-nav">
