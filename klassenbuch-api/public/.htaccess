@@ -1,0 +1,9 @@
+# Redirect to front controller
+RewriteEngine On
+RewriteBase /fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header set Access-Control-Allow-Headers "Authorization, Content-Type"
