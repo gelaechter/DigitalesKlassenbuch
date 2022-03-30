@@ -326,8 +326,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"></script>
 
         <script>
-            ajax_prefix = '/fileadmin/Skripte4JAG/klassenbuch';
-            // ajax_prefix = '';
+            //ajax_prefix = '/fileadmin/Skripte4JAG/klassenbuch';
+            ajax_prefix = '';
 
             lehrer_name = '';
             gruppe_name = '';
@@ -825,7 +825,7 @@
             * mit den der gewählten Gruppe zugehörigen Sitzplänen
             */
             function read_sitzplaene_laut_gruppe(gruppe_id) {
-                url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/sitzplan/gruppe/" + gruppe_id;
+                url = ajax_prefix + "/klassenbuch-api/api/sitzplan/gruppe/" + gruppe_id;
                 $.ajax({
                     url: url,
                     type: "GET",
@@ -861,7 +861,7 @@
                 if ($("#fach").val() && $("#fach").val() > 0) {
 
                 } else {
-                    url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/gruppe/" + gruppe_id;
+                    url = ajax_prefix + "/klassenbuch-api/api/gruppe/" + gruppe_id;
                     $.ajax({
                         url: url,
                         type: "GET",
@@ -1034,7 +1034,7 @@
             function read_corona_by_gruppe(id) {
                 console.log('coro read '+id);
 				$.ajax({
-                    url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/corona/gruppe/"+id,
+                    url: ajax_prefix + "/klassenbuch-api/api/corona/gruppe/"+id,
                     type: "GET",
                     success: function (data) {
                         
@@ -1124,7 +1124,7 @@
     
                 $.ajax({
                     type: 'PUT',
-                    url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/corona/vorhanden/' + erledigung_id,
+                    url: ajax_prefix + '/klassenbuch-api/api/corona/vorhanden/' + erledigung_id,
                     data: formdata,
                     success: function (json) {
 						console.log('cor '+corona_gruppe_id);
@@ -1156,7 +1156,7 @@
     
                 $.ajax({
                     type: 'POST',
-                    url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/corona/testneu',
+                    url: ajax_prefix + '/klassenbuch-api/api/corona/testneu',
                     data: formdata,
                     success: function (json) {
 						console.log('corNeu '+corona_gruppe_id);
@@ -1179,7 +1179,7 @@
              */
             function read_entschuldigung_aktuell_by_gruppe(id) {
                 $.ajax({
-                    url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/entschuldigung/aktuell/gruppe/' + id,
+                    url: ajax_prefix + '/klassenbuch-api/api/erledigung/entschuldigung/aktuell/gruppe/' + id,
                     type: "GET",
                     success: function (data) {
                         var response = $.parseJSON(data);
@@ -1399,10 +1399,10 @@
                     if (praesenzen[key].id) {
                         praesenz.id = praesenzen[key].id;
                         method = 'PUT';
-                        url = '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/praesenz/' + praesenz.id;
+                        url = ajax_prefix + '/klassenbuch-api/api/praesenz/' + praesenz.id;
                     } else {
                         method = 'POST';
-                        url = '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/praesenz';
+                        url = ajax_prefix + '/klassenbuch-api/api/praesenz';
                     }
                     console.log(praesenz);
 
@@ -1520,7 +1520,7 @@
             $("#praesenzen").find('button').remove().end();
             praesenzen = [];
 
-            var url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/praesenz_gruppe/"
+            var url = ajax_prefix + "/klassenbuch-api/api/praesenz_gruppe/"
                 + gruppe_id;
 
             $.ajax({
@@ -1608,7 +1608,7 @@
 
             erledigung_gruppe_id = gruppe_id;
 
-            url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/gruppe/" + gruppe_id +"/startseite";
+            url = ajax_prefix + "/klassenbuch-api/api/erledigung/gruppe/" + gruppe_id +"/startseite";
                 $.ajax({
                     url: url,
                     type: "GET",
@@ -1693,7 +1693,7 @@
     
                 $.ajax({
                     type: 'PUT',
-                    url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/corona/vorhanden/' + ide,
+                    url: ajax_prefix + '/klassenbuch-api/api/corona/vorhanden/' + ide,
                     data: formdata,
                     success: function (json) {
 						console.log('oce/cor '+corona_gruppe_id);
@@ -1723,7 +1723,7 @@
     
                 $.ajax({
                     type: 'PUT',
-                    url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/' + ide,
+                    url: ajax_prefix + '/klassenbuch-api/api/erledigung/' + ide,
                     data: formdata,
                     success: function (json) {
 						console.log('oce '+corona_gruppe_id);                        

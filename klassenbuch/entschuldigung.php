@@ -419,7 +419,7 @@
 
     <script>
        
-       
+       var ajax_prefix = '';
 
        // Tooltips initialisieren
        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -1210,7 +1210,7 @@
 
 
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/erledigung/"+er_id,
+                url: ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/erledigung/"+er_id,
                 type: "GET",
                 success: function (data) {
                     
@@ -1570,7 +1570,7 @@
             */
         function read_lehrer(event) {
             $.ajax({
-                url:  "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/lehrer",                    
+                url:  ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/lehrer",                    
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -1606,7 +1606,7 @@
         */
         function read_ustunden(event) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/ustunde",
+                url: ajax_prefix + "/klassenbuch-api/api/ustunde",
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -1631,7 +1631,7 @@
          */
         function read_gruppen(event) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/gruppe",
+                url: ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/gruppe",
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -1665,7 +1665,7 @@
         function read_schueler_by_gruppe(id) {
             console.log('sus rbg '+id);
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/gruppe/"+id,
+                url: ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/gruppe/"+id,
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -1747,7 +1747,7 @@
 
         function read_schueler(id) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/schueler/"+id,
+                url: ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/schueler/"+id,
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -1794,7 +1794,7 @@
         */
         function read_erledigungen(schueler_id, eigenschaft_id) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/erledigung/schueler/"+schueler_id+"/eigenschaft/"+eigenschaft_id,
+                url: ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/erledigung/schueler/"+schueler_id+"/eigenschaft/"+eigenschaft_id,
                 type: "GET",
                 success: function (data) {
                     
@@ -1839,7 +1839,7 @@
 
         function read_fehlzeitenuebersicht(schueler_id){            
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/erledigung/entschuldigung/fehlzeitenuebersicht/"+schueler_id,
+                url: ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/erledigung/entschuldigung/fehlzeitenuebersicht/"+schueler_id,
                 type: "GET",
                 success: function (data) {
                     
@@ -2783,7 +2783,7 @@
             
             $.ajax({
                 type: 'PUT',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/praesenz/' + un.praesenz_id,
+                url: ajax_prefix + '/klassenbuch-api/api/praesenz/' + un.praesenz_id,
                 data: data,
                 success: function (json) {
                     zeige_fehlzeitenuebersicht(fehlzeitenuebersicht);
@@ -2804,7 +2804,7 @@
         function read_erledigung(id){
 
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api"+api_url_modifier+"/erledigung/"+id,
+                url: ajax_prefix + "/klassenbuch-api/api"+api_url_modifier+"/erledigung/"+id,
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -2946,7 +2946,7 @@
 
         function read_zustimmungen(){            
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/zustimmung/lehrer/"+user_lehrer_id,
+                url: ajax_prefix + "/klassenbuch-api/api/zustimmung/lehrer/"+user_lehrer_id,
                 type: "GET",
                 success: function (data) {
                     
@@ -3011,7 +3011,7 @@
         function vonStunde_besetzen(time){
             von = time.substr(11,8);
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/ustunde/beginn/"+von,
+                url: ajax_prefix + "/klassenbuch-api/api/ustunde/beginn/"+von,
                 type: "GET",
                 success: function (data) {
                     
@@ -3027,7 +3027,7 @@
         function bisStunde_besetzen(time){
             bis = time.substr(11,8);
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/ustunde/ende/"+bis,
+                url: ajax_prefix + "/klassenbuch-api/api/ustunde/ende/"+bis,
                 type: "GET",
                 success: function (data) {
                     
@@ -3045,7 +3045,7 @@
             
             $.ajax({
                 type: 'PUT',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/zustimmung/' + id,
+                url: ajax_prefix + '/klassenbuch-api/api/zustimmung/' + id,
                 data: data,
                 success: function (json) {
                     read_zustimmungen();                   
@@ -3068,7 +3068,7 @@
             
             $.ajax({
                 type: 'PUT',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/zustimmung/' + zs.id,
+                url: ajax_prefix + '/klassenbuch-api/api/zustimmung/' + zs.id,
                 data: data,
                 success: function (json) {
                     zeige_zustimmungen();         
@@ -3089,7 +3089,7 @@
             
             $.ajax({
                 type: 'PUT',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api'+api_url_modifier+'/erledigung/' + erledigung_id,
+                url: ajax_prefix + '/klassenbuch-api/api'+api_url_modifier+'/erledigung/' + erledigung_id,
                 data: formdata,
                 success: function (json) {
                     speicher_mitteilungen();
@@ -3118,7 +3118,7 @@
             
             $.ajax({
                 type: 'POST',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api'+api_url_modifier+'/erledigung',
+                url: ajax_prefix + '/klassenbuch-api/api'+api_url_modifier+'/erledigung',
                 data: formdata,
                 success: function (json) {
                     read_vorgaenge_by_schueler($('#schueler').val());
@@ -3181,7 +3181,7 @@
 
                     $.ajax({
                         type: type,
-                        url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api'+api_url_modifier+url,
+                        url: ajax_prefix + '/klassenbuch-api/api'+api_url_modifier+url,
                         data: formdata,
                         success: function (json) {
                             speicher_mitteilungen_chunk(id+1);
@@ -3324,7 +3324,7 @@
             
             $.ajax({
                 type: 'PUT',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api'+api_url_modifier+'/erledigung/' + erledigung_id,
+                url: ajax_prefix + '/klassenbuch-api/api'+api_url_modifier+'/erledigung/' + erledigung_id,
                 data: JSON.stringify({lehrer_id : user_lehrer_id}),
                 success: function (json) {
                     speicher_mitteilungen();
