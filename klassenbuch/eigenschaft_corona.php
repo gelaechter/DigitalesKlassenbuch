@@ -184,7 +184,8 @@
 
     <script>
        
-        
+        var ajax_prefix = '';
+
         //Sitzplan UL Anfang Statusobjekt
         
         aktiv_gruppe_id = <?php echo $_SESSION['aktiv_gruppe_id'] ?: 'null' ?>;
@@ -235,7 +236,7 @@
          */
         function read_erledigung_by_gruppe(id_g,  id_e) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/gruppe/"+id_g+"/eigenschaft/"+id_e,
+                url: ajax_prefix + "/klassenbuch-api/api/erledigung/gruppe/"+id_g+"/eigenschaft/"+id_e,
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -395,7 +396,7 @@
 
         function read_erledigung_by_schueler(id_s,  id_e) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/schueler/"+id_s+"/eigenschaft/"+id_e,
+                url: ajax_prefix + "/klassenbuch-api/api/erledigung/schueler/"+id_s+"/eigenschaft/"+id_e,
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -554,7 +555,7 @@
 
             $.ajax({
                 type: 'PUT',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/' + erledigung.id,
+                url: ajax_prefix + '/klassenbuch-api/api/erledigung/' + erledigung.id,
                 data: formdata,
                 success: function (json) {
                     $('#erledigungModal').modal('hide');
@@ -601,7 +602,7 @@
 
             $.ajax({
                 type: 'PUT',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/' + erledigung.id,
+                url: ajax_prefix + '/klassenbuch-api/api/erledigung/' + erledigung.id,
                 data: formdata,
                 success: function (json) {
                     $('#erledigungModal').modal('hide');
@@ -653,7 +654,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung',
+                url: ajax_prefix + '/klassenbuch-api/api/erledigung',
                 data: formdata,
                 success: function (json) {
                     $('#erledigungModal').modal('hide');
@@ -705,7 +706,7 @@
 
             $.ajax({
                 type: type,
-                url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/corona/coronatyp'+url,
+                url: ajax_prefix + '/klassenbuch-api/api/corona/coronatyp'+url,
                 data: formdata,
                 success: function (json) {
                     //read_erledigung_by_gruppe($('#gruppe').val(),eigenschaft.id);
@@ -758,7 +759,7 @@
 
                     $.ajax({
                         type: type,
-                        url: '/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api'+url,
+                        url: ajax_prefix + '/klassenbuch-api/api'+url,
                         data: formdata,
                         success: function (json) {
                             speicher_mitteilungen_chunk(id+1);
@@ -884,7 +885,7 @@
 
         function read_erledigung(id){
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/erledigung/"+id,
+                url: ajax_prefix + "/klassenbuch-api/api/erledigung/"+id,
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -982,7 +983,7 @@
          */
         function read_gruppen(event) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/gruppe",
+                url: ajax_prefix + "/klassenbuch-api/api/gruppe",
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -1008,7 +1009,7 @@
              */
             function read_lehrer(event) {
                 $.ajax({
-                    url:  "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/lehrer",                    
+                    url:  ajax_prefix + "/klassenbuch-api/api/lehrer",                    
                     type: "GET",
                     success: function (data) {
                         var response = $.parseJSON(data);
@@ -1030,7 +1031,7 @@
              */
             function read_corona_typen(event) {
                 $.ajax({
-                    url:  "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/corona/typen",                    
+                    url:  ajax_prefix + "/klassenbuch-api/api/corona/typen",                    
                     type: "GET",
                     success: function (data) {
                         var response = $.parseJSON(data);
@@ -1074,7 +1075,7 @@
              */
             function read_schueler(id) {
                 $.ajax({
-                    url:  "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/schueler/"+id,                    
+                    url:  ajax_prefix + "/klassenbuch-api/api/schueler/"+id,                    
                     type: "GET",
                     success: function (data) {
                         var response = $.parseJSON(data);
