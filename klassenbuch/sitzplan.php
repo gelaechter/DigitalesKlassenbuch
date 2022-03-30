@@ -206,6 +206,7 @@
 
     <script>
        
+        ajax_prefix = '';
         
         //Sitzplan UL Anfang Statusobjekt
         
@@ -245,7 +246,7 @@
          */
         function read_gruppen(event) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/gruppe",
+                url: ajax_prefix + "/klassenbuch-api/api/gruppe",
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -267,7 +268,7 @@
          */
         function read_lehrer(event) {
             $.ajax({
-                url: "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/lehrer",
+                url: ajax_prefix + "/klassenbuch-api/api/lehrer",
                 type: "GET",
                 success: function (data) {
                     var response = $.parseJSON(data);
@@ -285,7 +286,7 @@
          * Befüllen des Raum-Selects in der Section Sitzplan
          */
         function read_raeume(event) {
-            url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/raum";
+            url = ajax_prefix + "/klassenbuch-api/api/raum";
             $.ajax({
                 url: url,
                 type: "GET",
@@ -405,7 +406,7 @@
          * mit den der gewählten Gruppe zugehörigen Sitzplänen
          */
         function read_sitzplaene_laut_gruppe() {
-            url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/sitzplan/gruppe/" + sitzplan.gruppe_id;
+            url = ajax_prefix + "/klassenbuch-api/api/sitzplan/gruppe/" + sitzplan.gruppe_id;
             $.ajax({
                 url: url,
                 type: "GET",
@@ -443,7 +444,7 @@
         function spl_read_gruppe() {
             sitzplan.gruppe = [];
 
-            url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/gruppe/" + sitzplan.gruppe_id;
+            url = ajax_prefix + "/klassenbuch-api/api/gruppe/" + sitzplan.gruppe_id;
             $.ajax({
                 url: url,
                 type: "GET",
@@ -733,7 +734,7 @@
          * -> Folgeaufruf zum Aktualisieren der Anzeige
          */ 
         function read_sitzplan(id) {
-            url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/sitzplan/" + id;
+            url = ajax_prefix + "/klassenbuch-api/api/sitzplan/" + id;
             $.ajax({
                 url: url,
                 type: "GET",
@@ -966,7 +967,7 @@
             if(!sitzplan.id || sitzplan.id < 0) {return;}            
             
             var method = 'PUT';
-            var url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/sitzplan/status/" + sitzplan.id;
+            var url = ajax_prefix + "/klassenbuch-api/api/sitzplan/status/" + sitzplan.id;
             var upd = true;
             var formData = JSON.stringify({sort : sitzplan.sort});
             
@@ -999,11 +1000,11 @@
             var upd = false;
             if (sitzplan.id && sitzplan.id > 0) {
                 method = 'PUT';
-                url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/sitzplan/" + sitzplan.id;
+                url = ajax_prefix + "/klassenbuch-api/api/sitzplan/" + sitzplan.id;
                 upd = true;
             } else {
                 method = 'POST';
-                url = "/fileadmin/Skripte4JAG/klassenbuch/klassenbuch-api/api/sitzplan";
+                url = ajax_prefix + "/klassenbuch-api/api/sitzplan";
                 delete sitzplan.id;                
             }
 
