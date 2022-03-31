@@ -2,8 +2,8 @@
 -- version 4.2.13.3
 -- http://www.phpmyadmin.net
 --
--- Host: 
--- Erstellungszeit: 25. Mrz 2022 um 18:44
+-- Host: db1580.mydbserver.com
+-- Erstellungszeit: 31. Mrz 2022 um 18:32
 -- Server Version: 8.0.25-15
 -- PHP-Version: 5.3.29
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */
 ;
 --
--- Datenbank: `usr_p111346_14`
+-- Datenbank: `klabu`
 --
 -- --------------------------------------------------------
 --
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `belegung` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 19836 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 19844 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `corona_typ`
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `corona_typ` (
   `updated_by` varchar(255) DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `geloescht` tinyint NOT NULL DEFAULT '0'
-) ENGINE = InnoDB AUTO_INCREMENT = 1602 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 1636 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `corona_typen`
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `corona_typen` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `kuerzel` varchar(32) DEFAULT NULL,
   `icon` varchar(64) DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 5 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `corona_vonbis`
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `corona_vonbis` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 124 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 125 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `eigenschaft`
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `erledigung` (
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
   `geloescht` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE = InnoDB AUTO_INCREMENT = 25384 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 27410 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `fach`
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `user_iserv` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `gruppe_id` int DEFAULT NULL,
   `message` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 34995 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 36224 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `mitteilung`
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `mitteilung` (
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
   `geloescht` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE = InnoDB AUTO_INCREMENT = 5771 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 5998 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `praesenz`
@@ -203,7 +203,70 @@ CREATE TABLE IF NOT EXISTS `praesenz` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 410375 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 423740 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+-- --------------------------------------------------------
+--
+-- Stellvertreter-Struktur des Views `praesenz_gruppe`
+--
+CREATE TABLE IF NOT EXISTS `praesenz_gruppe` (
+  `id` binary(0),
+  `unterricht_id` binary(0),
+  `belegung_id` int,
+  `fehlt` binary(0),
+  `entschuldigt` binary(0),
+  `verspaetet` binary(0),
+  `bemerkung` binary(0),
+  `schueler_id` int,
+  `gruppe_id` int,
+  `beginn` date,
+  `ende` date,
+  `nachname` varchar(100),
+  `vorname` varchar(100),
+  `teilgruppe` varchar(10),
+  `s_gruppe_id` int
+);
+-- --------------------------------------------------------
+--
+-- Stellvertreter-Struktur des Views `praesenz_ist`
+--
+CREATE TABLE IF NOT EXISTS `praesenz_ist` (
+  `id` int,
+  `unterricht_id` int,
+  `belegung_id` int,
+  `fehlt` int,
+  `entschuldigt` int,
+  `verspaetet` varchar(50),
+  `bemerkung` text,
+  `schueler_id` int,
+  `gruppe_id` int,
+  `beginn` date,
+  `ende` date,
+  `nachname` varchar(100),
+  `vorname` varchar(100),
+  `teilgruppe` varchar(10),
+  `s_gruppe_id` int
+);
+-- --------------------------------------------------------
+--
+-- Stellvertreter-Struktur des Views `praesenz_soll`
+--
+CREATE TABLE IF NOT EXISTS `praesenz_soll` (
+  `id` int,
+  `unterricht_id` int,
+  `belegung_id` int,
+  `fehlt` int,
+  `entschuldigt` int,
+  `verspaetet` varchar(50),
+  `bemerkung` text,
+  `schueler_id` int,
+  `gruppe_id` int,
+  `beginn` date,
+  `ende` date,
+  `nachname` varchar(100),
+  `vorname` varchar(100),
+  `teilgruppe` varchar(10),
+  `s_gruppe_id` int
+);
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `raum`
@@ -278,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `schueler` (
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
   `geloescht` tinyint NOT NULL DEFAULT '0'
-) ENGINE = InnoDB AUTO_INCREMENT = 10041 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 10043 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `sitzplan`
@@ -298,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `sitzplan` (
   `name` varchar(100) DEFAULT NULL,
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 1591 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 1594 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `sitzplatz`
@@ -315,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `sitzplatz` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 50895 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 51029 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `unterricht`
@@ -338,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `unterricht` (
   `created_by` varchar(255) DEFAULT NULL,
   `updated_by` varchar(255) DEFAULT NULL,
   `geloescht` tinyint(1) DEFAULT '0'
-) ENGINE = InnoDB AUTO_INCREMENT = 19654 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 20301 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `update`
@@ -351,7 +414,7 @@ CREATE TABLE IF NOT EXISTS `update` (
   `upload_start` timestamp NULL DEFAULT NULL,
   `upload_end` timestamp NULL DEFAULT NULL,
   `upload_allowed` tinyint NOT NULL DEFAULT '0'
-) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `update_belegung`
@@ -367,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `update_belegung` (
   `von` date DEFAULT NULL,
   `bis` date DEFAULT NULL,
   `belegung_id` int DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 7611 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 7618 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `update_gruppe`
@@ -405,7 +468,7 @@ CREATE TABLE IF NOT EXISTS `update_schueler` (
   `danis_gruppe_id` int DEFAULT NULL,
   `apollon_gruppe_id` int DEFAULT NULL,
   `schueler_id` int DEFAULT NULL
-) ENGINE = InnoDB AUTO_INCREMENT = 1662 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 1663 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
 --
 -- Tabellenstruktur für Tabelle `ustunde`
@@ -438,8 +501,102 @@ CREATE TABLE IF NOT EXISTS `zustimmung` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` varchar(255) DEFAULT NULL,
   `geloescht` tinyint NOT NULL DEFAULT '0'
-) ENGINE = InnoDB AUTO_INCREMENT = 13111 DEFAULT CHARSET = utf8mb3;
+) ENGINE = InnoDB AUTO_INCREMENT = 13821 DEFAULT CHARSET = utf8mb3;
 -- --------------------------------------------------------
+--
+-- Struktur des Views `praesenz_gruppe`
+--
+DROP TABLE IF EXISTS `praesenz_gruppe`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `klabu` @`localhost` SQL SECURITY DEFINER VIEW `praesenz_gruppe` AS
+select NULL AS `id`,
+  NULL AS `unterricht_id`,
+  `b`.`id` AS `belegung_id`,
+  NULL AS `fehlt`,
+  NULL AS `entschuldigt`,
+  NULL AS `verspaetet`,
+  NULL AS `bemerkung`,
+  `b`.`schueler_id` AS `schueler_id`,
+  `b`.`gruppe_id` AS `gruppe_id`,
+  `b`.`beginn` AS `beginn`,
+  `b`.`ende` AS `ende`,
+  `s`.`nachname` AS `nachname`,
+  `s`.`vorname` AS `vorname`,
+  `s`.`teilgruppe` AS `teilgruppe`,
+  `s`.`gruppe_id` AS `s_gruppe_id`
+from (
+    (
+      `gruppe` `g`
+      left join `belegung` `b` on((`b`.`gruppe_id` = `g`.`id`))
+    )
+    left join `schueler` `s` on((`s`.`id` = `b`.`schueler_id`))
+  );
+-- --------------------------------------------------------
+--
+-- Struktur des Views `praesenz_ist`
+--
+DROP TABLE IF EXISTS `praesenz_ist`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `klabu` @`localhost` SQL SECURITY DEFINER VIEW `praesenz_ist` AS
+select `p`.`id` AS `id`,
+  `p`.`unterricht_id` AS `unterricht_id`,
+  `p`.`belegung_id` AS `belegung_id`,
+  `p`.`fehlt` AS `fehlt`,
+  `p`.`entschuldigt` AS `entschuldigt`,
+  `p`.`verspaetet` AS `verspaetet`,
+  `p`.`bemerkung` AS `bemerkung`,
+  `b`.`schueler_id` AS `schueler_id`,
+  `b`.`gruppe_id` AS `gruppe_id`,
+  `b`.`beginn` AS `beginn`,
+  `b`.`ende` AS `ende`,
+  `s`.`nachname` AS `nachname`,
+  `s`.`vorname` AS `vorname`,
+  `s`.`teilgruppe` AS `teilgruppe`,
+  `s`.`gruppe_id` AS `s_gruppe_id`
+from (
+    (
+      `praesenz` `p`
+      left join `belegung` `b` on((`b`.`id` = `p`.`belegung_id`))
+    )
+    left join `schueler` `s` on((`s`.`id` = `b`.`schueler_id`))
+  );
+-- --------------------------------------------------------
+--
+-- Struktur des Views `praesenz_soll`
+--
+DROP TABLE IF EXISTS `praesenz_soll`;
+CREATE ALGORITHM = UNDEFINED DEFINER = `klabu` @`localhost` SQL SECURITY DEFINER VIEW `praesenz_soll` AS
+select `p`.`id` AS `id`,
+  `u`.`id` AS `unterricht_id`,
+  `b`.`id` AS `belegung_id`,
+  `p`.`fehlt` AS `fehlt`,
+  `p`.`entschuldigt` AS `entschuldigt`,
+  `p`.`verspaetet` AS `verspaetet`,
+  `p`.`bemerkung` AS `bemerkung`,
+  `b`.`schueler_id` AS `schueler_id`,
+  `b`.`gruppe_id` AS `gruppe_id`,
+  `b`.`beginn` AS `beginn`,
+  `b`.`ende` AS `ende`,
+  `s`.`nachname` AS `nachname`,
+  `s`.`vorname` AS `vorname`,
+  `s`.`teilgruppe` AS `teilgruppe`,
+  `s`.`gruppe_id` AS `s_gruppe_id`
+from (
+    (
+      (
+        (
+          `unterricht` `u`
+          left join `gruppe` `g` on((`u`.`gruppe_id` = `g`.`id`))
+        )
+        left join `belegung` `b` on((`b`.`gruppe_id` = `g`.`id`))
+      )
+      left join `praesenz` `p` on(
+        (
+          (`b`.`id` = `p`.`belegung_id`)
+          and (`u`.`id` = `p`.`unterricht_id`)
+        )
+      )
+    )
+    left join `schueler` `s` on((`s`.`id` = `b`.`schueler_id`))
+  );
 --
 -- Indizes der exportierten Tabellen
 --
@@ -454,7 +611,9 @@ ADD PRIMARY KEY (`id`),
 -- Indizes für die Tabelle `corona_typ`
 --
 ALTER TABLE `corona_typ`
-ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_corona_typ_erledigung` (`erledigung_id`),
+  ADD KEY `fk_corona_typ_corona_typen` (`corona_typen_id`);
 --
 -- Indizes für die Tabelle `corona_typen`
 --
@@ -469,12 +628,16 @@ ADD PRIMARY KEY (`id`);
 -- Indizes für die Tabelle `eigenschaft`
 --
 ALTER TABLE `eigenschaft`
-ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_eigenschaft_lehrer` (`lehrer_id`);
 --
 -- Indizes für die Tabelle `erledigung`
 --
 ALTER TABLE `erledigung`
-ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_erledigung_schueler` (`schueler_id`),
+  ADD KEY `fk_erledigung_eigenschaft` (`eigenschaft_id`),
+  ADD KEY `fk_erledigung_lehrer` (`lehrer_id`);
 --
 -- Indizes für die Tabelle `fach`
 --
@@ -487,7 +650,8 @@ ADD PRIMARY KEY (`id`),
 --
 ALTER TABLE `gruppe`
 ADD PRIMARY KEY (`id`),
-  ADD KEY `gruppe_lehrer_fk` (`lehrer_id`);
+  ADD KEY `gruppe_lehrer_fk` (`lehrer_id`),
+  ADD KEY `fk_gruppe_fach` (`fach_id`);
 --
 -- Indizes für die Tabelle `lehrer`
 --
@@ -503,7 +667,10 @@ ADD PRIMARY KEY (`id`);
 -- Indizes für die Tabelle `mitteilung`
 --
 ALTER TABLE `mitteilung`
-ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_mitteilung_erledigung` (`erledigung_id`),
+  ADD KEY `fk_mitteilung_lehrer` (`lehrer_id`),
+  ADD KEY `fk_mitteilung_schueler` (`schueler_id`);
 --
 -- Indizes für die Tabelle `praesenz`
 --
@@ -521,7 +688,9 @@ ADD PRIMARY KEY (`id`),
 -- Indizes für die Tabelle `rfid`
 --
 ALTER TABLE `rfid`
-ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_rfid_schueler` (`schueler_id`),
+  ADD KEY `fk_rfid_lehrer` (`lehrer_id`);
 --
 -- Indizes für die Tabelle `rfid_danis`
 --
@@ -549,7 +718,8 @@ ADD PRIMARY KEY (`id`),
 ALTER TABLE `sitzplan`
 ADD PRIMARY KEY (`id`),
   ADD KEY `sitzplan_gruppe_fk` (`gruppe_id`),
-  ADD KEY `sitzplan_raum_fk` (`raum_id`);
+  ADD KEY `sitzplan_raum_fk` (`raum_id`),
+  ADD KEY `fk_sitzplan_lehrer` (`lehrer_id`);
 --
 -- Indizes für die Tabelle `sitzplatz`
 --
@@ -602,7 +772,10 @@ ADD PRIMARY KEY (`id`),
 -- Indizes für die Tabelle `zustimmung`
 --
 ALTER TABLE `zustimmung`
-ADD PRIMARY KEY (`id`);
+ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_zustimmung_erledigung` (`erledigung_id`),
+  ADD KEY `fk_zustimmung_lehrer` (`lehrer_id`),
+  ADD KEY `fk_zustimmung_gruppe` (`gruppe_id`);
 --
 -- AUTO_INCREMENT für exportierte Tabellen
 --
@@ -611,13 +784,13 @@ ADD PRIMARY KEY (`id`);
 --
 ALTER TABLE `belegung`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 19836;
+  AUTO_INCREMENT = 19844;
 --
 -- AUTO_INCREMENT für Tabelle `corona_typ`
 --
 ALTER TABLE `corona_typ`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 1607;
+  AUTO_INCREMENT = 1639;
 --
 -- AUTO_INCREMENT für Tabelle `corona_typen`
 --
@@ -641,7 +814,7 @@ MODIFY `id` int NOT NULL AUTO_INCREMENT,
 --
 ALTER TABLE `erledigung`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 26117;
+  AUTO_INCREMENT = 27451;
 --
 -- AUTO_INCREMENT für Tabelle `fach`
 --
@@ -665,19 +838,19 @@ MODIFY `id` int NOT NULL AUTO_INCREMENT,
 --
 ALTER TABLE `log`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 35224;
+  AUTO_INCREMENT = 36478;
 --
 -- AUTO_INCREMENT für Tabelle `mitteilung`
 --
 ALTER TABLE `mitteilung`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 5820;
+  AUTO_INCREMENT = 6011;
 --
 -- AUTO_INCREMENT für Tabelle `praesenz`
 --
 ALTER TABLE `praesenz`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 413057;
+  AUTO_INCREMENT = 426859;
 --
 -- AUTO_INCREMENT für Tabelle `raum`
 --
@@ -713,25 +886,25 @@ MODIFY `id` int NOT NULL AUTO_INCREMENT,
 --
 ALTER TABLE `schueler`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 10041;
+  AUTO_INCREMENT = 10043;
 --
 -- AUTO_INCREMENT für Tabelle `sitzplan`
 --
 ALTER TABLE `sitzplan`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 1591;
+  AUTO_INCREMENT = 1597;
 --
 -- AUTO_INCREMENT für Tabelle `sitzplatz`
 --
 ALTER TABLE `sitzplatz`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 50924;
+  AUTO_INCREMENT = 51156;
 --
 -- AUTO_INCREMENT für Tabelle `unterricht`
 --
 ALTER TABLE `unterricht`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 19771;
+  AUTO_INCREMENT = 20485;
 --
 -- AUTO_INCREMENT für Tabelle `update`
 --
@@ -743,7 +916,7 @@ MODIFY `id` int NOT NULL AUTO_INCREMENT,
 --
 ALTER TABLE `update_belegung`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 7611;
+  AUTO_INCREMENT = 7618;
 --
 -- AUTO_INCREMENT für Tabelle `update_gruppe`
 --
@@ -761,13 +934,13 @@ MODIFY `id` int NOT NULL AUTO_INCREMENT,
 --
 ALTER TABLE `update_schueler`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 1662;
+  AUTO_INCREMENT = 1663;
 --
 -- AUTO_INCREMENT für Tabelle `zustimmung`
 --
 ALTER TABLE `zustimmung`
 MODIFY `id` int NOT NULL AUTO_INCREMENT,
-  AUTO_INCREMENT = 13164;
+  AUTO_INCREMENT = 13921;
 --
 -- Constraints der exportierten Tabellen
 --
@@ -778,16 +951,48 @@ ALTER TABLE `belegung`
 ADD CONSTRAINT `belegung_gruppe_fk` FOREIGN KEY (`gruppe_id`) REFERENCES `gruppe` (`id`),
   ADD CONSTRAINT `belegung_schueler_fk` FOREIGN KEY (`schueler_id`) REFERENCES `schueler` (`id`);
 --
+-- Constraints der Tabelle `corona_typ`
+--
+ALTER TABLE `corona_typ`
+ADD CONSTRAINT `fk_corona_typ_corona_typen` FOREIGN KEY (`corona_typen_id`) REFERENCES `corona_typen` (`id`),
+  ADD CONSTRAINT `fk_corona_typ_erledigung` FOREIGN KEY (`erledigung_id`) REFERENCES `erledigung` (`id`);
+--
+-- Constraints der Tabelle `eigenschaft`
+--
+ALTER TABLE `eigenschaft`
+ADD CONSTRAINT `fk_eigenschaft_lehrer` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`);
+--
+-- Constraints der Tabelle `erledigung`
+--
+ALTER TABLE `erledigung`
+ADD CONSTRAINT `fk_erledigung_eigenschaft` FOREIGN KEY (`eigenschaft_id`) REFERENCES `eigenschaft` (`id`),
+  ADD CONSTRAINT `fk_erledigung_lehrer` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`),
+  ADD CONSTRAINT `fk_erledigung_schueler` FOREIGN KEY (`schueler_id`) REFERENCES `schueler` (`id`);
+--
 -- Constraints der Tabelle `gruppe`
 --
 ALTER TABLE `gruppe`
-ADD CONSTRAINT `gruppe_lehrer_fk` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`);
+ADD CONSTRAINT `fk_gruppe_fach` FOREIGN KEY (`fach_id`) REFERENCES `fach` (`id`),
+  ADD CONSTRAINT `gruppe_lehrer_fk` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`);
+--
+-- Constraints der Tabelle `mitteilung`
+--
+ALTER TABLE `mitteilung`
+ADD CONSTRAINT `fk_mitteilung_erledigung` FOREIGN KEY (`erledigung_id`) REFERENCES `erledigung` (`id`),
+  ADD CONSTRAINT `fk_mitteilung_lehrer` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`),
+  ADD CONSTRAINT `fk_mitteilung_schueler` FOREIGN KEY (`schueler_id`) REFERENCES `schueler` (`id`);
 --
 -- Constraints der Tabelle `praesenz`
 --
 ALTER TABLE `praesenz`
 ADD CONSTRAINT `praesenz_belegung_fk` FOREIGN KEY (`belegung_id`) REFERENCES `belegung` (`id`),
   ADD CONSTRAINT `praesenz_unterricht_fk` FOREIGN KEY (`unterricht_id`) REFERENCES `unterricht` (`id`);
+--
+-- Constraints der Tabelle `rfid`
+--
+ALTER TABLE `rfid`
+ADD CONSTRAINT `fk_rfid_lehrer` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`),
+  ADD CONSTRAINT `fk_rfid_schueler` FOREIGN KEY (`schueler_id`) REFERENCES `schueler` (`id`);
 --
 -- Constraints der Tabelle `schueler`
 --
@@ -797,7 +1002,8 @@ ADD CONSTRAINT `schueler_gruppe_fk` FOREIGN KEY (`gruppe_id`) REFERENCES `gruppe
 -- Constraints der Tabelle `sitzplan`
 --
 ALTER TABLE `sitzplan`
-ADD CONSTRAINT `sitzplan_gruppe_fk` FOREIGN KEY (`gruppe_id`) REFERENCES `gruppe` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `fk_sitzplan_lehrer` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`),
+  ADD CONSTRAINT `sitzplan_gruppe_fk` FOREIGN KEY (`gruppe_id`) REFERENCES `gruppe` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sitzplan_raum_fk` FOREIGN KEY (`raum_id`) REFERENCES `raum` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
 -- Constraints der Tabelle `sitzplatz`
@@ -814,6 +1020,13 @@ ADD CONSTRAINT `unterricht_fach_fk` FOREIGN KEY (`fach_id`) REFERENCES `fach` (`
   ADD CONSTRAINT `unterricht_lehrer_fk` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`),
   ADD CONSTRAINT `unterricht_sitzplan_fk` FOREIGN KEY (`sitzplan_id`) REFERENCES `sitzplan` (`id`),
   ADD CONSTRAINT `unterricht_ustunde_fk` FOREIGN KEY (`ustunde_id`) REFERENCES `ustunde` (`id`);
+--
+-- Constraints der Tabelle `zustimmung`
+--
+ALTER TABLE `zustimmung`
+ADD CONSTRAINT `fk_zustimmung_erledigung` FOREIGN KEY (`erledigung_id`) REFERENCES `erledigung` (`id`),
+  ADD CONSTRAINT `fk_zustimmung_gruppe` FOREIGN KEY (`gruppe_id`) REFERENCES `gruppe` (`id`),
+  ADD CONSTRAINT `fk_zustimmung_lehrer` FOREIGN KEY (`lehrer_id`) REFERENCES `lehrer` (`id`);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
 ;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
