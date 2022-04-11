@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Klassenbuch</title>
+    <title>Klassenbuch2.0</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     
