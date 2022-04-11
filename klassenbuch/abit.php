@@ -6,6 +6,7 @@ require './auth.php'
 <!DOCTYPE html>
 <html>
 <li>Patrick versucht es wieder</li>
+<li>test 2</li>
 
 <head>
     <meta charset="utf-8" />
